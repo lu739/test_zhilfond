@@ -25,20 +25,13 @@ class DatabaseSeeder extends Seeder
 
         Product::factory()->count(20)->create();
 
-        $testOrders = Order::factory()->count(3)->create([
-            'user_id' => $testUser->id
+        Order::factory()->count(3)->create([
+            'user_id' => $testUser->id,
+            'product_list' => Product::query()
+                ->inRandomOrder()
+                ->limit(rand(1, 6))
+                ->pluck('name')
+                ->implode(', '),
         ]);
-
-        foreach ($testOrders as $order) {
-            $products = Product::query()->inRandomOrder()->limit(rand(1, 6))->get();
-
-            foreach ($products as $product) {
-                OrderItem::factory()->create([
-                    'product_id' => $product->id,
-                    'order_id' => $order->id,
-                    'price' => $product->price,
-                ]);
-            }
-        }
     }
 }

@@ -33,7 +33,8 @@
                 <x-secondary-button type="submit"
                     class="py-4">Очистить корзину</x-secondary-button>
             </form>
-            <form action="">
+            <form action="{{ route('orders.create') }}" method="POST">
+                @csrf
                 <x-primary-button class="py-4">Оформить заказ</x-primary-button>
             </form>
         </div>

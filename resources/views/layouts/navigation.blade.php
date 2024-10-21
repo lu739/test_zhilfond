@@ -16,6 +16,12 @@
                                 :active="request()->routeIs('products.index')">
                         Каталог товаров
                     </x-nav-link>
+{{--                    @auth()--}}
+                    <x-nav-link :href="route('orders.index')"
+                                :active="request()->routeIs('orders.index')">
+                        Заказы
+                    </x-nav-link>
+{{--                    @endauth--}}
                 </div>
             </div>
 

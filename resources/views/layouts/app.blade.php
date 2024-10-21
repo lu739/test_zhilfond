@@ -30,9 +30,9 @@
             <!-- Page Content -->
             <main>
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    @if(session()->has('success'))
+                    @if(session()->has('flash'))
                         <div class="flex-inline text-color-pink bg-white border border-pink p-3 rounded-lg mb-3">
-                            {{ session('success') }}
+                            {{ session('flash') }}
                         </div>
                     @endif
                     {{ $slot }}
