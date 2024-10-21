@@ -25,7 +25,7 @@ class CartController extends Controller
 
         return redirect()
             ->intended(route('cart.index'))
-            ->with('success', 'Товар добавлен в корзину');
+            ->with('flash', 'Товар добавлен в корзину');
     }
 
     public function truncate(): RedirectResponse
@@ -34,6 +34,6 @@ class CartController extends Controller
 
         return redirect()
             ->intended(route('cart.index'))
-            ->with('success', 'Корзина очищена');
+            ->with('flash', 'Корзина очищена');
     }
 }
