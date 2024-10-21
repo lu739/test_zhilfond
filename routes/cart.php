@@ -9,4 +9,5 @@ Route::controller(CartController::class)
     ->group(function () {
         Route::get('/', 'index')->name('cart.index');
         Route::post('/add/{product}', 'add')->name('cart.add');
+        Route::post('/truncate', 'truncate')->name('cart.truncate');
     });

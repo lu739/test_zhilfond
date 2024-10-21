@@ -10,6 +10,7 @@
                         <th scope="col">Товар</th>
                         <th scope="col">Цена</th>
                         <th scope="col">Количество</th>
+                        <th scope="col">Сумма</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,14 +19,22 @@
                         <td class="px-2 py-1">{{ $cartItem->product->name }}</td>
                         <td class="px-2 py-1 text-right">{{ $cartItem->price }} $</td>
                         <td class="px-2 py-1 text-center">{{ $cartItem->quantity }}</td>
+                        <td class="px-2 py-1 text-center">{{ $cartItem->amount }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-
-        <div class="w-full">
+        <div class="w-full flex gap-2 mt-4">
+            <div class="font-bold text-2xl">Общая сумма: {{ cart()->total() }} $</div>
+        </div>
+        <div class="w-full flex-wrap flex gap-2 mt-4">
+            <form action="{{ route('cart.truncate') }}" method="POST">
+                @csrf
+                <x-secondary-button type="submit"
+                    class="py-4">Очистить корзину</x-secondary-button>
+            </form>
             <form action="">
-                <x-primary-button class="py-4 mt-4">Оформить заказ</x-primary-button>
+                <x-primary-button class="py-4">Оформить заказ</x-primary-button>
             </form>
         </div>
         @else

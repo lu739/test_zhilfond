@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -62,6 +63,12 @@ class CartManager
         return $this->get()->cartItems()->with('product')->get();
     }
 
+    public function total(): int
+    {
+        return $this->getCartItems()
+            ->sum(fn (CartItem $cartItem) => $cartItem->amount);
+    }
+
     public function add(Product $product, int $quantity = 1): Cart
     {
         // Получаем корзину или создаем новую
@@ -91,5 +98,16 @@ class CartManager
         $this->forgetCache();
 
         return $cart;
+    }
+
+    public function truncate(): void
+    {
+        if (!$this->get()) {
+            return;
+        }
+
+        $this->get()->delete();
+
+        $this->forgetCache();
     }
 }
