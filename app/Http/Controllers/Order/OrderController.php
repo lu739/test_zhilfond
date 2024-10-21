@@ -32,6 +32,10 @@ class OrderController extends Controller
     {
         $orders = Order::all();
 
+        if (auth()->check()) {
+            $orders = $orders->where('user_id', auth()->id());
+        }
+
         return view('order.index', compact('orders'));
     }
 

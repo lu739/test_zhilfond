@@ -16,6 +16,14 @@ class CartManager
     {
         return session()->getId();
     }
+
+    public function updateIdentity(string $old, string $new): void
+    {
+        Cart::query()
+            ->where('session_id', $old)
+            ->update($this->identityData($new));
+    }
+
     private function cacheKey(): string
     {
         return str('cart_' . $this->getIdentity())
@@ -27,6 +35,7 @@ class CartManager
     {
         Cache::forget($this->cacheKey());
     }
+
     private function identityData(string $sessionId): array
     {
         $data = [
