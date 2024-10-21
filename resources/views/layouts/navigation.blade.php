@@ -54,6 +54,13 @@
                 </x-dropdown>
             </div>
             @endauth
+
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('cart.index')"
+                            :active="request()->routeIs('cart.index')">
+                    Корзина
+                </x-nav-link>
+            </div>
         </div>
     </div>
 
